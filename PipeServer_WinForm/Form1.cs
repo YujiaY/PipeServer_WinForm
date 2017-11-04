@@ -29,15 +29,15 @@ namespace PipeServer_WinForm
 
             try
             {
-                // Read one line of user input from the console and sends that to the client process.
+                // Read user input from the console and sends that to the client process.
                 using (StreamWriter sw = new StreamWriter(pipeServer))
                 {
                     sw.AutoFlush = true;
                     sw.WriteLine(tbInput.Text.ToString());
                 }
             }
-            // This server program finishes after it has written the text line to the named pipe.
-            catch (IOException ex) // Catch the IOException that is raised if the pipe is broken or disconnected.
+            // Catch the IOException that is raised if the pipe is broken or disconnected.
+            catch (IOException ex) 
             {
                 lbInfo.Text += "ERROR: " + ex.Message;
             }
@@ -45,6 +45,8 @@ namespace PipeServer_WinForm
 
 
             lbState.Text = "Message sent. If you want to send again please click \"Connect\" again.";
+
+            //Enable the "Send" button
             btnSend.Enabled = false;
 
         }
@@ -74,7 +76,7 @@ namespace PipeServer_WinForm
                 lbState.Text += "\nEnter text.";
             }
 
-
+            //Disable the button in case for causing "close pipe" exception
             btnSend.Enabled = true;
 
 
